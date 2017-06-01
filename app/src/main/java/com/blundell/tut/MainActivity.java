@@ -56,7 +56,7 @@ public class MainActivity extends Activity {
             data[p++] = (byte) color.g;
             data[p++] = (byte) color.r;
         }
-        for (int i = 32; i < 37; i++) {
+        for (int i = 32; i < TRANSACTION_SIZE; i++) {
             data[i] = ZERO_BITS;
         }
 
