@@ -29,9 +29,9 @@ public class MainActivity extends Activity {
         private static final Color BLUE = new Color(0, 0, 50);
 
         private static final Color[] RAINBOW = {
-            Color.RED, Color.YELLOW, Color.PINK,
-            Color.GREEN,
-            Color.ORANGE, Color.PURPLE, Color.BLUE
+                Color.RED, Color.YELLOW, Color.PINK,
+                Color.GREEN,
+                Color.ORANGE, Color.PURPLE, Color.BLUE
         };
 
         int r;
@@ -52,11 +52,6 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         PeripheralManagerService service = new PeripheralManagerService();
-
-        for (String s : service.getSpiBusList()) {
-            Log.d("!!!", s);
-        }
-
         try {
             bus = service.openSpiDevice(APA102_RGB_7_LED_SLAVE);
         } catch (IOException e) {
