@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class MainActivity extends Activity {
 
-    private static final String APA102_RGB_7_PIXELS_SLAVE = "SPI3.1";
+    private static final String APA102_RGB_7_LED_SLAVE = "SPI3.1";
 
     private static final byte LED_START_FRAME = (byte) 0b11100000;
     private static final byte LED_BRIGHTNESS = (byte) 0b00000011;
@@ -58,16 +58,16 @@ public class MainActivity extends Activity {
         }
 
         try {
-            bus = service.openSpiDevice(APA102_RGB_7_PIXELS_SLAVE);
+            bus = service.openSpiDevice(APA102_RGB_7_LED_SLAVE);
         } catch (IOException e) {
-            throw new IllegalStateException(APA102_RGB_7_PIXELS_SLAVE + " connection cannot be opened.", e);
+            throw new IllegalStateException(APA102_RGB_7_LED_SLAVE + " connection cannot be opened.", e);
         }
         try {
             bus.setMode(SpiDevice.MODE2);
 //            bus.setFrequency(1_000_000); // 1Mhz
 //            bus.setBitsPerWord(8);
         } catch (IOException e) {
-            throw new IllegalStateException(APA102_RGB_7_PIXELS_SLAVE + " cannot be configured.", e);
+            throw new IllegalStateException(APA102_RGB_7_LED_SLAVE + " cannot be configured.", e);
         }
     }
 
@@ -94,7 +94,7 @@ public class MainActivity extends Activity {
         try {
             bus.write(data, data.length);
         } catch (IOException e) {
-            throw new IllegalStateException(APA102_RGB_7_PIXELS_SLAVE + " cannot be written to.", e);
+            throw new IllegalStateException(APA102_RGB_7_LED_SLAVE + " cannot be written to.", e);
         }
 
     }
@@ -104,7 +104,7 @@ public class MainActivity extends Activity {
         try {
             bus.close();
         } catch (IOException e) {
-            Log.e("TUT", APA102_RGB_7_PIXELS_SLAVE + "connection cannot be closed, you may experience errors on next launch.", e);
+            Log.e("TUT", APA102_RGB_7_LED_SLAVE + "connection cannot be closed, you may experience errors on next launch.", e);
         }
         super.onDestroy();
     }
