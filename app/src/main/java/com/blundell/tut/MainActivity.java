@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.google.android.things.pio.PeripheralManagerService;
+import com.google.android.things.pio.PeripheralManager;
 import com.google.android.things.pio.SpiDevice;
 
 import java.io.IOException;
@@ -25,7 +25,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        PeripheralManagerService service = new PeripheralManagerService();
+        PeripheralManager service = PeripheralManager.getInstance();
         try {
             bus = service.openSpiDevice(APA102_RGB_7_LED_SLAVE);
         } catch (IOException e) {
@@ -35,6 +35,7 @@ public class MainActivity extends Activity {
             bus.setMode(SpiDevice.MODE2);
 //            bus.setFrequency(1_000_000); // 1Mhz
 //            bus.setBitsPerWord(8);
+//            bus.setBitJustification(false); // MSB first
         } catch (IOException e) {
             throw new IllegalStateException(APA102_RGB_7_LED_SLAVE + " cannot be configured.", e);
         }
@@ -65,7 +66,6 @@ public class MainActivity extends Activity {
         } catch (IOException e) {
             throw new IllegalStateException(APA102_RGB_7_LED_SLAVE + " cannot be written to.", e);
         }
-
     }
 
     @Override
